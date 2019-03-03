@@ -15,6 +15,11 @@
 @interface PBXProjParser : NSObject
 
 /**
+ pbxproj文件路径
+ */
+@property (nonatomic, copy, nullable) NSString *pbxprojPath;
+
+/**
  pbxproj的根字典
  */
 @property (nonatomic, strong, nullable) NSDictionary *pbxprojDictionary;

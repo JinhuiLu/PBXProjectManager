@@ -10,8 +10,6 @@
 
 @interface PBXProjParser ()
 
-@property (nonatomic, copy) NSString *pbxprojPath;
-
 @end
 
 @implementation PBXProjParser
@@ -24,6 +22,11 @@
         instance = [[self alloc] init];
     });
     return instance;
+}
+
+- (void)setPbxprojPath:(NSString *)pbxprojPath
+{
+    [self parseProjectWithPath:pbxprojPath];
 }
 
 - (void)parseProjectWithPath:(NSString *)projPath
@@ -44,7 +47,7 @@
     {
         NSLog(@"读取project.pbxproj成功");
         
-        self.pbxprojPath = projPath;
+        _pbxprojPath = projPath;
         // 解析 project 字典
         self.pbxprojDictionary = projectDict;
         
@@ -56,7 +59,6 @@
         // 将 rootObject 的值作为 Key 在 objects 对应的字典中找到根对象 rootObject
         NSString *rootObjectId = projectDict[@"rootObject"];
         
-//        self.project = [[PBXProject alloc] initWithObjectId:rootObjectId data:self.objects.data[rootObjectId]];
         self.project = [self.objects createPBXProjectWithRootObjectId:rootObjectId data:self.objects.data[rootObjectId]];
     }
     else
@@ -64,18 +66,10 @@
         NSLog(@"pbxproj无法解析！！");
         self.project = nil;
         self.pbxprojDictionary = nil;
-        self.pbxprojPath = nil;
+        _pbxprojPath = nil;
         return;
     }
 }
-
-
-//- (void)save
-//{
-//    // 写入文件
-//    NSString *pbxResultString = [self.pbxprojDictionary convertToPBXProjFormatString];
-//    [pbxResultString writeToFile:self.pbxprojPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
-//}
 
 
 @end

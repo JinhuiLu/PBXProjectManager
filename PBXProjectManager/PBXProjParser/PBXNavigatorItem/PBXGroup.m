@@ -299,7 +299,15 @@ static NSDictionary *fileTypeMapping_;
     }
     else
     {
-        
+        NSString *compPath = [path stringByDeletingLastPathComponent];
+        if (!compPath || [compPath hasSuffix:@"/"])
+        {
+            return (PBXGroup *)[self findItemWithPath:path];
+        }
+        else
+        {
+            return (PBXGroup *)[self findItemWithPath:compPath];
+        }
     }
     
     return group;

@@ -8,6 +8,10 @@
 
 #import "PBXCompare.h"
 
+#import "PBXProjParser.h"
+
+#import "NSDictionary+PBXProjectFormat.h"
+
 @implementation PBXCompare
 
 + (NSDictionary *)compare:(NSDictionary *)data1 withOtherData:(NSDictionary *)data2
@@ -392,6 +396,16 @@
         return complete(value);
     }
     
+}
+
++ (void)save
+{
+    if ([PBXProjParser sharedInstance].pbxprojPath)
+    {
+        // 写入文件
+        NSString *pbxResultString = [[PBXProjParser sharedInstance].pbxprojDictionary convertToPBXProjFormatString];
+        [pbxResultString writeToFile:[PBXProjParser sharedInstance].pbxprojPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    }
 }
 
 @end

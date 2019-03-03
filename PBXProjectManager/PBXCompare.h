@@ -31,6 +31,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (NSDictionary *)apply:(NSDictionary *)diffDict onProjectData:(NSDictionary *)projectData;
 
+
+/**
+ 保存修改的文件
+ */
++ (void)save;
+
 @end
 
 NS_ASSUME_NONNULL_END

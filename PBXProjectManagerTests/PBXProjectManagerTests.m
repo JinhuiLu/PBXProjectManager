@@ -256,6 +256,13 @@
     NSLog(@"testDeepFindFile:\n%@",item.data);
 }
 
+- (void)testDeepFindParentGroup
+{
+    PBXNavigatorItem *item = [self.parser.project.mainGroup findParentGroupWithPath:@"//B"];
+    
+    NSLog(@"testDeepFindParentGroup:\n%@",item.data);
+}
+
 #pragma mark -
 
 - (void)compareLog:(NSString *)methodName
@@ -271,7 +278,7 @@
     if (!_parser)
     {
         _parser = [PBXProjParser sharedInstance];
-        [_parser parseProjectWithPath:@"/Users/lujh/Desktop/pbxxxx/TestMST1/TestMST.xcodeproj/project.pbxproj"];
+        [_parser parseProjectWithPath:@"/Users/lujh/Desktop/TestParse/TestParse.xcodeproj/project.pbxproj"];
     }
     return _parser;
 }
