@@ -68,23 +68,24 @@
 
 - (void)setBuildSetting:(NSString *)name settingValue:(id)settingValue
 {
-    if (!settingValue)
-    {
-        settingValue = @"";
-    }
     self.data[@"buildSettings"][name] = settingValue;
 }
 
 // 设置名字
 - (void)setName:(NSString *)name
 {
-    
+    self.data[name] = name;
 }
 
 // 设置bitcode
 - (void)setBitCode:(BOOL)value
 {
-    
+    NSString *setting = @"YES";
+    if (!value)
+    {
+        setting = @"NO";
+    }
+    [self setBuildSetting:@"ENABLE_BITCODE" settingValue:setting];
 }
 
 #pragma mark - private method
