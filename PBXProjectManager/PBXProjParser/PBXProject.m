@@ -61,7 +61,7 @@
     
     // buildConfigurationList
     NSString *configListId = data[@"buildConfigurationList"];
-    self.buildConfigurationList = [[XCConfigurationList alloc] initWithObjectId:configListId data:objects[productRefGroupId]];
+    self.buildConfigurationList = [[XCConfigurationList alloc] initWithObjectId:configListId data:objects[configListId]];
 }
 
 - (PBXTarget *)_createTarget:(NSString *)targetId
